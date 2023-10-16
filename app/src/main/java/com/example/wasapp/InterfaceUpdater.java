@@ -27,37 +27,42 @@ public class InterfaceUpdater {
         notifier = new Notifier(context);
     }
 
-    public void updateInterface(Settings settings, float exteriorTemperature,
-                                float interiorTemperature, int clock) {
+    public boolean updateInterface(Settings settings, float exteriorTemperature,
+                                float interiorTemperature, Integer clock) {
         exteriorTemperatureText.setText("Exterior T: " + exteriorTemperature);
         interiorTemperatureText.setText("Interior T: " + interiorTemperature);
         targetTemperatureText.setText("Target T: " + settings.getTargetTemperature());
 
         if (clock < settings.getMessageDelay())
-            return; // if the last message is too recent, immediately return
+            return false; // if the last message is too recent, immediately return
 
         if (interiorTemperature > exteriorTemperature + settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() < interiorTemperature) {
             notifier.NotifyOpen(); // you stand to gain cooling by opening windows
             notificationText.setText(openWindowsText);
-            return;
+            clock = 0; // reset the clock
+            return true;
         } else if (interiorTemperature > exteriorTemperature + settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() > interiorTemperature) {
             notifier.NotifyClose(); // you stand to retain heat by closing windows
             notificationText.setText(closeWindowsText);
-            return;
+            clock = 0;
+            return true;
         } else if (interiorTemperature < exteriorTemperature - settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() < interiorTemperature) {
             notifier.NotifyClose(); // you stand to retain cool air by closing windows
             notificationText.setText(closeWindowsText);
-            return;
+            clock = 0;
+            return true;
         } else if (interiorTemperature < exteriorTemperature - settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() > interiorTemperature) {
             notifier.NotifyOpen(); // you stand to gain heat by opening windows
             notificationText.setText(openWindowsText);
-            return;
+            clock = 0;
+            return true;
         }
 
         notificationText.setText(defaultText);
+        return false;
     }
 }

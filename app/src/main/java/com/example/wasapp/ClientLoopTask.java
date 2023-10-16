@@ -60,16 +60,19 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
             elapsed = System.currentTimeMillis();
 
             // update temperature
-            float temperature;
+            TempStruct tempStruct;
             try {
-                temperature = TemperatureRetriever.retrieveTemperature();
+                tempStruct = TemperatureRetriever.getTemperatures();
             } catch (Exception e) {
                 notificationText.setText(String.valueOf(errorText));
                 continue; // try again immediately
             }
 
-            interfaceUpdater.updateInterface(settings, temperature,
-                    10, secondsSinceLastNotification); // update interface
+            if (interfaceUpdater.updateInterface(settings, tempStruct.exteriorTemperature,
+                    tempStruct.interiorTemperature, secondsSinceLastNotification)) {
+                // if the interface updated....
+                secondsSinceLastNotification = 0; // reset clock
+            }
 
             try {
                 Thread.sleep(5000); // sleep 5 seconds until next iteration...
