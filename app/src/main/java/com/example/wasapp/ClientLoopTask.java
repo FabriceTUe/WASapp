@@ -12,18 +12,29 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
     private String errorText;
     private TextView notificationText;
     private Context context;
-    private static Notifier notifier;
+    private Notifier notifier;
+    private InterfaceUpdater interfaceUpdater;
+    private Settings settings;
 
     // Singleton:
     private static ClientLoopTask instance;
     private ClientLoopTask() {}
-    public static synchronized ClientLoopTask getInstance(Context context) {
+    public static synchronized ClientLoopTask getInstance(Context context,
+                                                          TextView interiorTemperatureText,
+                                                          TextView exteriorTemperatureText,
+                                                          TextView targetTemperatureText,
+                                                          TextView notificationText,
+                                                          Settings settings) {
         if (instance == null) {
             instance = new ClientLoopTask();
             instance.context = context;
-            notifier = new Notifier(context);
+            instance.notifier = new Notifier(context);
+            instance.interfaceUpdater = new InterfaceUpdater(context,
+                    interiorTemperatureText, exteriorTemperatureText,
+                    targetTemperatureText, notificationText);
             instance.errorText =
                     "Check sensor connection.";
+            instance.settings = settings;
             elapsed = System.currentTimeMillis();
         }
         return instance;
@@ -57,17 +68,8 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
                 continue; // try again immediately
             }
 
-            if (temperature < targetTemperature &&
-            secondsSinceLastNotification > 30 &&
-            !hasBeenNotified) {
-                secondsSinceLastNotification = 0;
-                notifier.NotifyClose();
-            } else if (temperature > targetTemperature &&
-            secondsSinceLastNotification > 30 &&
-            !hasBeenNotified) {
-                secondsSinceLastNotification = 0;
-                notifier.NotifyOpen();
-            }
+            interfaceUpdater.updateInterface(settings, temperature,
+                    10, secondsSinceLastNotification); // update interface
 
             try {
                 Thread.sleep(5000); // sleep 5 seconds until next iteration...

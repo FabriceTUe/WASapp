@@ -8,16 +8,60 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/temperatureText"
-        android:layout_width="189dp"
-        android:layout_height="65dp"
-        android:text="0 °C"
+        android:id="@+id/interiorTemperatureText"
+        android:layout_width="201dp"
+        android:layout_height="42dp"
+        android:text="Interior T: 0 °C"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="32sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159" />
+
+    <TextView
+        android:id="@+id/exteriorTemperatureText"
+        android:layout_width="201dp"
+        android:layout_height="42dp"
+        android:text="Exterior T: 0 °C"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.242" />
+
+    <TextView
+        android:id="@+id/targetTemperatureText"
+        android:layout_width="201dp"
+        android:layout_height="42dp"
+        android:text="Target T: 0 °C"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.322" />
+
+    <TextView
+        android:id="@+id/notificationText"
+        android:layout_width="342dp"
+        android:layout_height="65dp"
+        android:text="Exterior T: 0 °C"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.726" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
