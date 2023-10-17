@@ -1,0 +1,15 @@
+1. Stabilizing the app:
+	- Make it so that the UI constantly updates, and only notifications are sent only one time every x seconds.
+2. Adding configuration of ESP modules:
+	- Make a menu in which you can put your SSID, wifi password, and WAS-numbers of the two ESP modules.
+	- Have phone send SSID, password to modules.
+		-> connect to network with WAS-number as name
+		-> send credentials
+	- Have the ESP module save credentials.
+3. Add settings menu:
+	- have field for:
+		- tolerance
+		- target temperature
+		- notification interval
+	- save settings object to phone (in json file).
+4. Extract APK and test on actual phone.
