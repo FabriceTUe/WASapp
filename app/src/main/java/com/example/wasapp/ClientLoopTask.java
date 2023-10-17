@@ -5,10 +5,6 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 
 public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
-    private float targetTemperature;
-    private boolean hasBeenNotified;
-    private int secondsSinceLastNotification;
-    private static long elapsed;
     private String errorText;
     private TextView notificationText;
     private Context context;
@@ -35,30 +31,14 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
             instance.errorText =
                     "Check sensor connection.";
             instance.settings = settings;
-            elapsed = System.currentTimeMillis();
+            instance.notificationText = notificationText;
         }
         return instance;
-    }
-
-    public void setTargetTemperature(float targetTemperature) {
-        this.targetTemperature = targetTemperature;
-    }
-
-    public void setNotificationText(TextView notificationText) {
-        this.notificationText = notificationText;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
         while (true) { // we run in an infinite loop...
-            // update clock
-            secondsSinceLastNotification += (System.currentTimeMillis() - elapsed) / 1000;
-            elapsed = System.currentTimeMillis();
-
             // update temperature
             TempStruct tempStruct;
             try {
@@ -68,11 +48,8 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
                 continue; // try again immediately
             }
 
-            if (interfaceUpdater.updateInterface(settings, tempStruct.exteriorTemperature,
-                    tempStruct.interiorTemperature, secondsSinceLastNotification)) {
-                // if the interface updated....
-                secondsSinceLastNotification = 0; // reset clock
-            }
+            interfaceUpdater.updateInterface(settings, tempStruct.exteriorTemperature,
+                    tempStruct.interiorTemperature);
 
             try {
                 Thread.sleep(5000); // sleep 5 seconds until next iteration...

@@ -15,6 +15,9 @@ public class InterfaceUpdater {
     private String closeWindowsText = "Close your windows.";
     private String defaultText = "Window state optimal.";
 
+    private long lastTime;
+    private long clock;
+
     public InterfaceUpdater(Context context, TextView interiorTemperatureText,
                             TextView exteriorTemperatureText,
                             TextView targetTemperatureText,
@@ -24,14 +27,19 @@ public class InterfaceUpdater {
         this.exteriorTemperatureText = exteriorTemperatureText;
         this.targetTemperatureText = targetTemperatureText;
         this.notificationText = notificationText;
+        this.lastTime = System.currentTimeMillis();
+        this.clock = 0;
         notifier = new Notifier(context);
     }
 
     public boolean updateInterface(Settings settings, float exteriorTemperature,
-                                float interiorTemperature, Integer clock) {
+                                float interiorTemperature) {
         exteriorTemperatureText.setText("Exterior T: " + exteriorTemperature);
         interiorTemperatureText.setText("Interior T: " + interiorTemperature);
         targetTemperatureText.setText("Target T: " + settings.getTargetTemperature());
+
+        clock += (System.currentTimeMillis() - lastTime) / 1000;
+        lastTime = System.currentTimeMillis();
 
         if (clock < settings.getMessageDelay())
             return false; // if the last message is too recent, immediately return
