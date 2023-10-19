@@ -11,15 +11,18 @@ import androidx.annotation.Nullable;
 
 
 public class NotifyService extends Service {
-    private Notifier notifier;
+    NotifyTask notifyTask;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        notifyTask = new NotifyTask(getBaseContext());
+        notifyTask.execute();
         return Service.START_STICKY_COMPATIBILITY;
     }
 
     @Override
     public void onDestroy() {
+        notifyTask.cancel(true);
         Log.d("DEBUG: ", "Notifier service stopped...");
         super.onDestroy();
     }
