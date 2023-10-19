@@ -13,7 +13,7 @@ public class InterfaceUpdater {
 
     private String openWindowsText = "Open your windows.";
     private String closeWindowsText = "Close your windows.";
-    private String defaultText = "Window state optimal.";
+    private String defaultText = "Change nothing.";
 
     private long lastTime;
     private long clock;
@@ -28,7 +28,7 @@ public class InterfaceUpdater {
         this.targetTemperatureText = targetTemperatureText;
         this.notificationText = notificationText;
         this.lastTime = System.currentTimeMillis();
-        this.clock = 0;
+        this.clock = Integer.MAX_VALUE; // approximately corresponds to setting to '\infty'
         notifier = new Notifier(context);
     }
 
@@ -41,32 +41,37 @@ public class InterfaceUpdater {
         clock += (System.currentTimeMillis() - lastTime) / 1000;
         lastTime = System.currentTimeMillis();
 
-        if (clock < settings.getMessageDelay())
-            return false; // if the last message is too recent, immediately return
-
         if (interiorTemperature > exteriorTemperature + settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() < interiorTemperature) {
-            notifier.NotifyOpen(); // you stand to gain cooling by opening windows
+            if (clock > settings.getMessageDelay()) {
+                notifier.NotifyOpen(); // you stand to gain cooling by opening windows
+                clock = 0; // reset the clock
+            }
             notificationText.setText(openWindowsText);
-            clock = 0; // reset the clock
             return true;
         } else if (interiorTemperature > exteriorTemperature + settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() > interiorTemperature) {
-            notifier.NotifyClose(); // you stand to retain heat by closing windows
+            if (clock > settings.getMessageDelay()) {
+                notifier.NotifyClose(); // you stand to retain heat by closing windows
+                clock = 0;
+            }
             notificationText.setText(closeWindowsText);
-            clock = 0;
             return true;
         } else if (interiorTemperature < exteriorTemperature - settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() < interiorTemperature) {
-            notifier.NotifyClose(); // you stand to retain cool air by closing windows
+            if (clock > settings.getMessageDelay()) {
+                notifier.NotifyClose(); // you stand to retain cool air by closing windows
+                clock = 0;
+            }
             notificationText.setText(closeWindowsText);
-            clock = 0;
             return true;
         } else if (interiorTemperature < exteriorTemperature - settings.getTemperatureTolerance() &&
         settings.getTargetTemperature() > interiorTemperature) {
-            notifier.NotifyOpen(); // you stand to gain heat by opening windows
+            if (clock > settings.getMessageDelay()) {
+                notifier.NotifyOpen(); // you stand to gain heat by opening windows
+                clock = 0;
+            }
             notificationText.setText(openWindowsText);
-            clock = 0;
             return true;
         }
 

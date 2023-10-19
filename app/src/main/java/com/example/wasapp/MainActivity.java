@@ -1,15 +1,18 @@
 package com.example.wasapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import okhttp3.OkHttpClient;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // create client to send/receive web requests/responses:
     private OkHttpClient httpClient = new OkHttpClient();
@@ -28,11 +31,26 @@ public class MainActivity extends AppCompatActivity {
         TextView exteriorTemperatureText = findViewById(R.id.exteriorTemperatureText);
         TextView targetTemperatureText = findViewById(R.id.targetTemperatureText);
         TextView notificationText = findViewById(R.id.notificationText);
-        Settings settings = Settings.getInstance();
+        Button settingsButton = findViewById(R.id.settingsButton);
+        // set the onclick listener for the button (see method below)
+        settingsButton.setOnClickListener(this);
+        Settings settings = Settings.getInstance(this);
 
         clientLoopTask = ClientLoopTask.getInstance(this, interiorTemperatureText,
                 exteriorTemperatureText, targetTemperatureText, notificationText, settings);
         clientLoopTask.execute();
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(this,
+                SettingsActivity.class); // intend to switch to settings...
+        startActivity(intent); // start the next activity.
+    }
+
+    @Override
+    public void onBackPressed() {
+        // ignore any back press (keep simple)
     }
 
     @Override

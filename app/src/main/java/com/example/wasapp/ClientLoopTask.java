@@ -38,7 +38,7 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        while (true) { // we run in an infinite loop...
+        while (!isCancelled()) { // we run as long as we're not cancelled...
             // update temperature
             TempStruct tempStruct;
             try {
@@ -57,5 +57,6 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
                 throw new RuntimeException(e);
             }
         }
+        return null;
     }
 }
