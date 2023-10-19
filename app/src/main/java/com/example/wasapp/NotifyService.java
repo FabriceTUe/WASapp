@@ -15,7 +15,7 @@ public class NotifyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return 0;
+        return Service.START_STICKY_COMPATIBILITY;
     }
 
     @Override
