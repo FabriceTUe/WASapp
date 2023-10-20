@@ -8,14 +8,14 @@ import okhttp3.Response;
 
 public class TemperatureRetriever {
     private static String exteriorURL = "http://192.168.43.82/temperature";
-    private static String interiorURL = "http://192.168.43.83/temperature";
+    private static String interiorURL = "http://192.168.43.234/temperature";
     private static OkHttpClient httpClient = new OkHttpClient();
 
     public static TempStruct getTemperatures() throws
             IOException, NullPointerException {
             TempStruct tempStruct = new TempStruct();
+            tempStruct.interiorTemperature = retrieveTemperature(interiorURL);
             tempStruct.exteriorTemperature = retrieveTemperature(exteriorURL);
-            tempStruct.interiorTemperature = 10;
 
             return tempStruct;
     }
