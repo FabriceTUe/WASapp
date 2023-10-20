@@ -28,7 +28,7 @@ public class InterfaceUpdater {
         this.targetTemperatureText = targetTemperatureText;
         this.notificationText = notificationText;
         this.lastTime = System.currentTimeMillis();
-        this.clock = Integer.MAX_VALUE; // approximately corresponds to setting to '\infty'
+        this.clock = 0; // approximately corresponds to setting to '\infty'
         notifier = new Notifier(context);
     }
 
