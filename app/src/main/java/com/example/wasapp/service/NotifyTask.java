@@ -1,7 +1,12 @@
-package com.example.wasapp;
+package com.example.wasapp.service;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.example.wasapp.Notifier;
+import com.example.wasapp.Settings;
+import com.example.wasapp.TempStruct;
+import com.example.wasapp.TemperatureRetriever;
 
 import java.io.IOException;
 

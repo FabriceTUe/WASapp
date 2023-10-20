@@ -1,4 +1,4 @@
-package com.example.wasapp;
+package com.example.wasapp.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
