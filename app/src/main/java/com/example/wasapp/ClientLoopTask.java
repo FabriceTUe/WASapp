@@ -42,7 +42,7 @@ public class ClientLoopTask extends AsyncTask<Void, Void, Void> {
             // update temperature
             TempStruct tempStruct;
             try {
-                tempStruct = TemperatureRetriever.getTemperatures();
+                tempStruct = TemperatureRetriever.getTemperatures(settings);
             } catch (Exception e) {
                 notificationText.setText(String.valueOf(errorText));
                 continue; // try again immediately

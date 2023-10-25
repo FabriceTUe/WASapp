@@ -38,12 +38,7 @@ public class NotifyTask extends AsyncTask<Void, Void, Void> {
                 System.out.println(clock);
             }
 
-            try {
-                tempStruct = TemperatureRetriever.getTemperatures();
-            } catch (IOException e) {
-                // assume lost connection
-                continue; // try again
-            }
+            // used to fetch T here...
 
             if (tempStruct.interiorTemperature > tempStruct.interiorTemperature + settings.getTemperatureTolerance() &&
                     settings.getTargetTemperature() < tempStruct.interiorTemperature) {

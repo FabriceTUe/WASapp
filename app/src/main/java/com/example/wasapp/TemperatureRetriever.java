@@ -1,21 +1,20 @@
 package com.example.wasapp;
 
 import java.io.IOException;
+import java.util.Set;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class TemperatureRetriever {
-    private static String exteriorURL = "http://192.168.43.82/temperature";
-    private static String interiorURL = "http://192.168.43.234/temperature";
     private static OkHttpClient httpClient = new OkHttpClient();
 
-    public static TempStruct getTemperatures() throws
+    public static TempStruct getTemperatures(Settings settings) throws
             IOException, NullPointerException {
             TempStruct tempStruct = new TempStruct();
-            tempStruct.interiorTemperature = retrieveTemperature(interiorURL);
-            tempStruct.exteriorTemperature = retrieveTemperature(exteriorURL);
+            tempStruct.interiorTemperature = retrieveTemperature(settings.getInteriorUrl());
+            tempStruct.exteriorTemperature = retrieveTemperature(settings.getExteriorUrl());
 
             return tempStruct;
     }

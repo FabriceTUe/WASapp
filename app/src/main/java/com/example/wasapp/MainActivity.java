@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getBaseContext(),
-                    SettingsActivity.class); // intend to switch to settings...
+                    ConfigureActivity.class); // intend to switch to settings...
             startActivity(intent); // start the next activity.
         }
     }

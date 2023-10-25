@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Set;
 
@@ -45,11 +46,21 @@ public class ConfigureActivity extends AppCompatActivity implements View.OnClick
         String exteriorUrl = exteriorUrlText.getText().toString();
         String interiorUrl = interiorUrlText.getText().toString();
 
+        if (!exteriorUrl.startsWith("http://") || !interiorUrl.startsWith("http://")) {
+            Toast.makeText(this, "Please enter a valid URL.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         // save input:
         settings.setExteriorUrl(exteriorUrl);
         settings.setInteriorUrl(interiorUrl);
         settings.save(this);
 
         finish(); // kill this activity and return to previous
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

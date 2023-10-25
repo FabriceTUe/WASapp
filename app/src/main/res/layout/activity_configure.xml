@@ -6,11 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ConfigureActivity">
 
+    <EditText
+        android:id="@+id/interiorUrlEditText"
+        android:layout_width="317dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Interior URL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Text1" />
+
+    <EditText
+        android:id="@+id/exteriorUrlEditText"
+        android:layout_width="317dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Exterior URL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text3" />
+
     <TextView
         android:id="@+id/text3"
         android:layout_width="142dp"
         android:layout_height="34dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="192dp"
         android:text="Exterior URL:"
         android:textColor="#000000"
@@ -19,35 +43,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/exteriorUrlEditText"
-        android:layout_width="317dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Exterior URL"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text3" />
-
-    <EditText
-        android:id="@+id/interiorUrlEditText"
-        android:layout_width="317dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Interior URL"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Text1" />
-
     <TextView
         android:id="@+id/Text1"
         android:layout_width="142dp"
         android:layout_height="34dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="76dp"
         android:text="Interior URL:"
         android:textColor="#000000"
@@ -60,7 +60,9 @@
         android:id="@+id/setButton"
         android:layout_width="178dp"
         android:layout_height="82dp"
+        android:layout_marginBottom="164dp"
         android:text="Set"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="600dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
