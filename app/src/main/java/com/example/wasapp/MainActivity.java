@@ -32,9 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView targetTemperatureText = findViewById(R.id.targetTemperatureText);
         TextView notificationText = findViewById(R.id.notificationText);
         Button settingsButton = findViewById(R.id.settingsButton);
-        // set the onclick listener for the button (see method below)
+        Button configurationButton = findViewById(R.id.configureButton);
+
+        // set the onclick listener for settings button (see method below)
         settingsButton.setOnClickListener(this);
         Settings settings = Settings.getInstance(this);
+
+        // set onclick listener for config button:
+        configurationButton.setOnClickListener(new ConfigButtonHandler());
 
         clientLoopTask = ClientLoopTask.getInstance(this, interiorTemperatureText,
                 exteriorTemperatureText, targetTemperatureText, notificationText, settings);
@@ -57,5 +62,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         clientLoopTask.cancel(true); // close down the background task...
         super.onDestroy();
+    }
+
+    private class ConfigButtonHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getBaseContext(),
+                    SettingsActivity.class); // intend to switch to settings...
+            startActivity(intent); // start the next activity.
+        }
     }
 }

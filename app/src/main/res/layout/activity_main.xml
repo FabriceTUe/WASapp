@@ -86,43 +86,16 @@
         android:background="#6200ED"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674"
+        app:layout_constraintVertical_bias="0.627"
         tools:srcCompat="?attr/selectableItemBackground" />
-
-    <TextView
-        android:id="@+id/notificationText"
-        android:layout_width="236dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="-50dp"
-        android:text="Loading..."
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
-
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="189dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="84dp"
-        android:text="Settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationText"
-        app:layout_constraintVertical_bias="0.474" />
 
     <TextView
         android:id="@+id/InfoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
+        android:layout_marginStart="128dp"
         android:layout_marginBottom="50dp"
         android:text="Optimal Action:"
         android:textColor="#FFFFFF"
@@ -131,6 +104,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        app:layout_constraintVertical_bias="0.628" />
+
+    <TextView
+        android:id="@+id/notificationText"
+        android:layout_width="236dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="-50dp"
+        android:text="Loading..."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.591" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="189dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="108dp"
+        android:text="Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notificationText"
+        app:layout_constraintVertical_bias="0.274" />
+
+    <Button
+        android:id="@+id/configureButton"
+        android:layout_width="189dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="108dp"
+        android:text="Configure"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsButton"
+        app:layout_constraintVertical_bias="0.15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,21 +7,19 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Scanner;
 
 public class Settings {
     private float targetTemperature;
     private float temperatureTolerance;
     private int messageDelay;
+    private String exteriorUrl;
+    private String interiorUrl;
     private static final String fileName = "settings.json";
 
     // Singleton
@@ -35,6 +33,8 @@ public class Settings {
                 instance.targetTemperature = 24; // set defaults...
                 instance.temperatureTolerance = 0;
                 instance.messageDelay = 30;
+                instance.exteriorUrl = "http://192.168.43.82/temperature";
+                instance.interiorUrl = "http://192.168.43.234/temperature";
             } else {
                 instance = loadedInstance;
             }
@@ -110,4 +110,10 @@ public class Settings {
     public int getMessageDelay() {
         return messageDelay;
     }
+
+    public void setExteriorUrl(String exteriorUrl) { this.exteriorUrl = exteriorUrl; }
+    public String getExteriorUrl() { return exteriorUrl; }
+
+    public void setInteriorUrl(String interiorUrl) { this.interiorUrl = interiorUrl; }
+    public String getInteriorUrl() { return interiorUrl; }
 }
